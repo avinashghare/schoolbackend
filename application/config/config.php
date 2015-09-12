@@ -16,26 +16,8 @@
 */
 $myserver=$_SERVER['SERVER_NAME'];
 
-//if($myserver=="www.mafiawarloots.com" || $myserver=="www.wohlig.biz" || $myserver=="mafiawarloots.com" || $myserver=="wohlig.biz")
-if($myserver!="localhost")
-{
-$myconfig= base64_decode(file_get_contents("/home/mafiawarloots/config/createo.png"));
-}
-else
-{
-$myconfig= file_get_contents("C:/xampp/htdocs/config/config.json");
-}
-$config['myconfig']=json_decode($myconfig);
 
-$myconfig=json_decode($myconfig);
-
-$config['base_url']	= $myconfig->baseurl;
-$config['projectname']=$myconfig->projectname;
-$config['database']=$myconfig->database;
-$config['username']=$myconfig->username;
-$config['hostname']=$myconfig->hostname;
-$config['password']=$myconfig->password;
-//$config['base_url']	= '';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------

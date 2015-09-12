@@ -415,8 +415,41 @@ class Site extends CI_Controller
         else
         {
             $name=$this->input->get_post("name");
-            $image=$this->input->get_post("image");
+//            $image=$this->input->get_post("image");
             $status=$this->input->get_post("status");
+            
+            $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                }  
+                else
+                {
+                    $image=$this->image_lib->dest_image;
+                }
+                
+			}
+            
+            
             if($this->album_model->create($name,$image,$status)==0)
             $data["alerterror"]="New album could not be created.";
             else
@@ -454,8 +487,47 @@ class Site extends CI_Controller
         {
             $id=$this->input->get_post("id");
             $name=$this->input->get_post("name");
-            $image=$this->input->get_post("image");
+//            $image=$this->input->get_post("image");
             $status=$this->input->get_post("status");
+            
+            $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                }  
+                else
+                {
+                    $image=$this->image_lib->dest_image;
+                }
+                
+			}
+            
+            if($image=="")
+            {
+            $image=$this->album_model->getalbumimagebyid($id);
+                $image=$image->image;
+            }
+            
+            
             if($this->album_model->edit($id,$name,$image,$status)==0)
             $data["alerterror"]="New album could not be Updated.";
             else
@@ -554,8 +626,41 @@ class Site extends CI_Controller
         {
             $album=$this->input->get_post("album");
             $name=$this->input->get_post("name");
-            $image=$this->input->get_post("image");
+//            $image=$this->input->get_post("image");
             $status=$this->input->get_post("status");
+            
+            $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                }  
+                else
+                {
+                    $image=$this->image_lib->dest_image;
+                }
+                
+			}
+            
+            
             if($this->albumimage_model->create($album,$name,$image,$status)==0)
             $data["alerterror"]="New albumimage could not be created.";
             else
@@ -595,8 +700,47 @@ class Site extends CI_Controller
             $id=$this->input->get_post("id");
             $album=$this->input->get_post("album");
             $name=$this->input->get_post("name");
-            $image=$this->input->get_post("image");
+//            $image=$this->input->get_post("image");
             $status=$this->input->get_post("status");
+            
+            $config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$this->load->library('upload', $config);
+			$filename="image";
+			$image="";
+			if (  $this->upload->do_upload($filename))
+			{
+				$uploaddata = $this->upload->data();
+				$image=$uploaddata['file_name'];
+                
+                $config_r['source_image']   = './uploads/' . $uploaddata['file_name'];
+                $config_r['maintain_ratio'] = TRUE;
+                $config_t['create_thumb'] = FALSE;///add this
+                $config_r['width']   = 800;
+                $config_r['height'] = 800;
+                $config_r['quality']    = 100;
+                //end of configs
+
+                $this->load->library('image_lib', $config_r); 
+                $this->image_lib->initialize($config_r);
+                if(!$this->image_lib->resize())
+                {
+                    echo "Failed." . $this->image_lib->display_errors();
+                }  
+                else
+                {
+                    $image=$this->image_lib->dest_image;
+                }
+                
+			}
+            
+            if($image=="")
+            {
+            $image=$this->albumimage_model->getalbumimageimagebyid($id);
+                $image=$image->image;
+            }
+            
+            
             if($this->albumimage_model->edit($id,$album,$name,$image,$status)==0)
             $data["alerterror"]="New albumimage could not be Updated.";
             else

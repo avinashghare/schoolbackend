@@ -1,3 +1,3 @@
 <?php
-echo getconfig("projectname");
+echo "Your Dashboard";
 ?>

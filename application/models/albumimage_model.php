@@ -37,5 +37,10 @@ class albumimage_model extends CI_Model
         $query=$this->db->query("DELETE FROM `school_albumimage` WHERE `id`='$id'");
         return $query;
     }
+	public function getalbumimageimagebyid($id)
+	{
+		$query=$this->db->query("SELECT `image` FROM `school_albumimage` WHERE `id`='$id'")->row();
+		return $query;
+	}
 }
 ?>
